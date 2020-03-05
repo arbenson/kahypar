@@ -23,7 +23,6 @@
 #include <vector>
 
 #include "gmock/gmock.h"
-#include "kahypar/application/command_line_options.h"
 #include "kahypar/definitions.h"
 #include "kahypar/io/hypergraph_io.h"
 #include "kahypar/kahypar.h"

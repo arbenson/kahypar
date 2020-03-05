@@ -20,7 +20,6 @@
 
 #include "libkahypar.h"
 
-#include "kahypar/application/command_line_options.h"
 #include "kahypar/io/hypergraph_io.h"
 #include "kahypar/macros.h"
 #include "kahypar/partition/context.h"
@@ -52,12 +51,6 @@ void kahypar_context_free(kahypar_context_t* kahypar_context) {
   delete reinterpret_cast<kahypar::Context*>(kahypar_context);
 }
 
-
-void kahypar_configure_context_from_file(kahypar_context_t* kahypar_context,
-                                         const char* ini_file_name) {
-  kahypar::parseIniToContext(*reinterpret_cast<kahypar::Context*>(kahypar_context),
-                             ini_file_name);
-}
 
 void kahypar_read_hypergraph_from_file(const char* file_name,
                                        kahypar_hypernode_id_t* num_vertices,
