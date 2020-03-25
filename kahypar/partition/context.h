@@ -50,7 +50,7 @@ struct CommunityDetection {
   bool reuse_communities = false;
   LouvainEdgeWeight edge_weight = LouvainEdgeWeight::UNDEFINED;
   uint32_t max_pass_iterations = std::numeric_limits<uint32_t>::max();
-  long double min_eps_improvement = std::numeric_limits<long double>::max();
+  double min_eps_improvement = std::numeric_limits<double>::max();
 };
 
 struct PreprocessingParameters {

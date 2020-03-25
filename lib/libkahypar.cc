@@ -227,7 +227,7 @@ void kahypar_set_context_preprocessing_community_detection_max_pass_iterations(k
 }
 
 void kahypar_set_context_preprocessing_community_detection_min_eps_improvement(kahypar_context_t* kahypar_context,
-									       long double min_eps_improvement) {
+									       double min_eps_improvement) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
   context.preprocessing.community_detection.min_eps_improvement = min_eps_improvement;
 }

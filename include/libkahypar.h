@@ -185,7 +185,7 @@ KAHYPAR_API void kahypar_set_context_preprocessing_community_detection_max_pass_
 											   uint32_t max_pass_iterations);
 
 KAHYPAR_API void kahypar_set_context_preprocessing_community_detection_min_eps_improvement(kahypar_context_t* kahypar_context,
-											   long double min_eps_improvement);
+											   double min_eps_improvement);
 
 KAHYPAR_API void kahypar_set_context_coarsening_algorithm(kahypar_context_t* kahypar_context,
 							  const char* ctype);
