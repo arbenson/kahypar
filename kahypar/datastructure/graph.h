@@ -93,7 +93,7 @@ class Graph {
 
  public:
   static constexpr NodeID kInvalidNode = std::numeric_limits<NodeID>::max();
-  static constexpr long double kEpsilon = 1e-5;
+  static constexpr double kEpsilon = 1e-5;
   using NodeIterator = std::vector<NodeID>::const_iterator;
   using EdgeIterator = std::vector<Edge>::const_iterator;
   using IncidentClusterWeightIterator = std::vector<IncidentClusterWeight>::const_iterator;
@@ -821,6 +821,6 @@ class Graph {
 };
 
 constexpr NodeID Graph::kInvalidNode;
-constexpr long double Graph::kEpsilon;
+constexpr double Graph::kEpsilon;
 }  // namespace ds
 }  // namespace kahypar

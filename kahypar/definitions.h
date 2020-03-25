@@ -52,7 +52,7 @@ using IncidenceIterator = Hypergraph::IncidenceIterator;
 // #########Graph-Definitions#############
 using NodeID = HypernodeID;
 using EdgeID = HyperedgeID;
-using EdgeWeight = long double;
+using EdgeWeight = double;
 using ClusterID = PartitionID;
 using Flow = int32_t;
 using Capacity = int32_t;
