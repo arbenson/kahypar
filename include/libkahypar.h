@@ -103,6 +103,11 @@ KAHYPAR_API void kahypar_improve_partition(const kahypar_hypernode_id_t num_vert
 KAHYPAR_API void kahypar_set_context_partition_mode(kahypar_context_t* kahypar_context,
 						    const char* mode);
 
+
+KAHYPAR_API void kahypar_set_context_verbose_output(kahypar_context_t* kahypar_context,
+						    bool verbose_output);
+  
+
 KAHYPAR_API void kahypar_set_context_partition_objective(kahypar_context_t* kahypar_context,
 							 const char* s);
 
@@ -256,6 +261,9 @@ KAHYPAR_API void kahypar_set_context_local_search_flow_use_improvement_history(k
 KAHYPAR_API void kahypar_set_context_initial_partitioning_mode(kahypar_context_t* kahypar_context,
 							       const char* ip_mode);
 
+KAHYPAR_API void kahypar_set_context_initial_partitioning_verbose_output(kahypar_context_t* kahypar_context,
+									 bool verbose_output);
+  
 KAHYPAR_API void kahypar_set_context_initial_partitioning_technique(kahypar_context_t* kahypar_context,
 								    const char* ip_technique);
 

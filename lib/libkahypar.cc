@@ -38,6 +38,12 @@ void kahypar_set_context_partition_mode(kahypar_context_t* kahypar_context,
   context.partition.mode = kahypar::modeFromString(mode);
 }
 
+void kahypar_set_context_verbose_output(kahypar_context_t* kahypar_context,
+					bool verbose_output) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  context.partition.verbose_output = verbose_output;
+}
+
 void kahypar_set_context_partition_objective(kahypar_context_t* kahypar_context,
 					     const char* s) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
@@ -88,12 +94,6 @@ void kahypar_set_context_partition_hyperedge_size_threshold(kahypar_context_t* k
   if (hyperedge_size_threshold == -1) {
     std::numeric_limits<kahypar::HyperedgeID>::max();
   }
-}
-
-void kahypar_set_context_partition_verbose_output(kahypar_context_t* kahypar_context,
-						  bool verbose_output) {
-  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
-  context.partition.verbose_output = verbose_output;
 }
 
 void kahypar_set_context_partition_quiet_mode(kahypar_context_t* kahypar_context,
@@ -294,7 +294,7 @@ void kahypar_set_context_local_search_iterations_per_level(kahypar_context_t* ka
 							   int iterations_per_level) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.iterations_per_level = iterations_per_level;
-  if (context.local_search.iterations_per_level == -1) {
+  if (iterations_per_level == -1) {
     context.local_search.iterations_per_level = std::numeric_limits<int>::max();
   }
 }
@@ -379,6 +379,12 @@ void kahypar_set_context_initial_partitioning_mode(kahypar_context_t* kahypar_co
   context.initial_partitioning.mode = kahypar::modeFromString(ip_mode);
 }
 
+void kahypar_set_context_initial_partitioning_verbose_output(kahypar_context_t* kahypar_context,
+							     bool verbose_output) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
+  context.initial_partitioning.verbose_output = verbose_output;
+}
+
 void kahypar_set_context_initial_partitioning_technique(kahypar_context_t* kahypar_context,
 						   const char* ip_technique) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
@@ -395,12 +401,6 @@ void kahypar_set_context_initial_partitioning_nruns(kahypar_context_t* kahypar_c
 						    uint32_t nruns) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.nruns = nruns;
-}
-
-void kahypar_set_context_initial_partitioning_verbose_output(kahypar_context_t* kahypar_context,
-							     bool verbose_output) {
-  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
-  context.initial_partitioning.verbose_output = verbose_output;
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_algorithm(kahypar_context_t* kahypar_context,
@@ -463,7 +463,7 @@ void kahypar_set_context_initial_partitioning_local_search_iterations_per_level(
 										int iterations_per_level) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.iterations_per_level = iterations_per_level;
-  if (context.local_search.iterations_per_level == -1) {
+  if (iterations_per_level == -1) {
     context.initial_partitioning.local_search.iterations_per_level = std::numeric_limits<int>::max();
   }
 }
