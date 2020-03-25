@@ -28,21 +28,25 @@
 
 
 // PartitioningParameters
-
 kahypar_context_t* kahypar_context_new() {
   return reinterpret_cast<kahypar_context_t*>(new kahypar::Context());
 }
 
 void kahypar_set_context_partition_mode(kahypar_context_t* kahypar_context,
-					const std::string& mode) {
+					const char* mode) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.partition.mode = kahypar::modeFromString(mode);
 }
 
 void kahypar_set_context_partition_objective(kahypar_context_t* kahypar_context,
-					     kahypar::Objective objective) {
-  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
-  context.partition.objective = objective;
+					     const char* s) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  std::string s_str(s);
+  if (s_str == "cut") {
+    context.partition.objective = kahypar::Objective::cut;
+  } else if (s_str == "km1") {
+    context.partition.objective = kahypar::Objective::km1;
+  }
 }
 
 void kahypar_set_context_partition_k(kahypar_context_t* kahypar_context,
@@ -114,7 +118,7 @@ void kahypar_set_context_partition_use_individual_part_weights(kahypar_context_t
 }
 
 void kahypar_set_context_partition_graph_filename(kahypar_context_t* kahypar_context,
-						  const std::string& graph_filename) {
+						  const char* graph_filename) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
   context.partition.graph_filename = graph_filename;
 
@@ -133,13 +137,13 @@ void kahypar_set_context_partition_graph_filename(kahypar_context_t* kahypar_con
 }
 
 void kahypar_set_context_partition_fixed_vertex_filename(kahypar_context_t* kahypar_context,
-							 const std::string& fixed_vertex_filename) {
+							 const char* fixed_vertex_filename) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
   context.partition.fixed_vertex_filename = fixed_vertex_filename;
 }
 
 void kahypar_set_context_partition_input_partition_filename(kahypar_context_t* kahypar_context,
-							    const std::string& input_partition_filename) {
+							    const char* input_partition_filename) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
   context.partition.input_partition_filename = input_partition_filename;
 }
@@ -211,7 +215,7 @@ void kahypar_set_context_preprocessing_community_detection_reuse_communities(kah
 }
 
 void kahypar_set_context_preprocessing_community_detection_edge_weight(kahypar_context_t* kahypar_context,
-								       const std::string& edge_weight) {
+								       const char* edge_weight) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);  
   context.preprocessing.community_detection.edge_weight = kahypar::edgeWeightFromString(edge_weight);
 }
@@ -230,7 +234,7 @@ void kahypar_set_context_preprocessing_community_detection_min_eps_improvement(k
 
 // Context.CoarseningParameters
 void kahypar_set_context_coarsening_algorithm(kahypar_context_t* kahypar_context,
-					      const std::string& ctype) {
+					      const char* ctype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.coarsening.algorithm = kahypar::coarseningAlgorithmFromString(ctype);
 }
@@ -248,7 +252,7 @@ void kahypar_set_context_coarsening_max_allowed_weight_multiplier(kahypar_contex
 }
 
 void kahypar_set_context_coarsening_RP_rating_function(kahypar_context_t* kahypar_context,
-						       const std::string& rating_score) {
+						       const char* rating_score) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.coarsening.rating.rating_function = kahypar::ratingFunctionFromString(rating_score);
 }
@@ -262,26 +266,26 @@ void kahypar_set_context_coarsening_RP_community_policy(kahypar_context_t* kahyp
 }
 
 void kahypar_set_context_coarsening_RP_heavy_node_policy(kahypar_context_t* kahypar_context,
-							 const std::string& penalty) {
+							 const char* penalty) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.coarsening.rating.heavy_node_penalty_policy = kahypar::heavyNodePenaltyFromString(penalty);
 }
 
 void kahypar_set_context_coarsening_RP_acceptance_policy(kahypar_context_t* kahypar_context,
-							 const std::string& crit) {
+							 const char* crit) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.coarsening.rating.acceptance_policy = kahypar::acceptanceCriterionFromString(crit);
 }
 
 void kahypar_set_context_coarsening_RP_fixed_vertex_acceptance_policy(kahypar_context_t* kahypar_context,
-								      const std::string& crit) {
+								      const char* crit) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.coarsening.rating.fixed_vertex_acceptance_policy = kahypar::fixedVertexAcceptanceCriterionFromString(crit);
 }
 
 // Context.LocalSearchParameters
 void kahypar_set_context_local_search_algorithm(kahypar_context_t* kahypar_context,
-				      const std::string& rtype) {
+				      const char* rtype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.algorithm = kahypar::refinementAlgorithmFromString(rtype);
 }
@@ -299,9 +303,6 @@ void kahypar_set_context_local_search_fm_max_number_of_fruitless_moves(kahypar_c
 								       uint32_t max_number_of_fruitless_moves) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.fm.max_number_of_fruitless_moves = max_number_of_fruitless_moves;
-  if (context.local_search.iterations_per_level == -1) {
-    context.local_search.iterations_per_level = std::numeric_limits<int>::max();
-  }
 }
 
 void kahypar_set_context_local_search_fm_adaptive_stopping_alpha(kahypar_context_t* kahypar_context,
@@ -311,21 +312,27 @@ void kahypar_set_context_local_search_fm_adaptive_stopping_alpha(kahypar_context
 }
 
 void kahypar_set_context_local_search_fm_stopping_rule(kahypar_context_t* kahypar_context,
-						       const std::string& stopfm) {
+						       const char* stopfm) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.fm.stopping_rule = kahypar::stoppingRuleFromString(stopfm);
 }
 
 void kahypar_set_context_local_search_flow_algorithm(kahypar_context_t* kahypar_context,
-						     const std::string& ftype) {
+						     const char* ftype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.flow.algorithm = kahypar::flowAlgorithmFromString(ftype);
 }
 
 void kahypar_set_context_local_search_flow_network(kahypar_context_t* kahypar_context,
-						   const std::string& ftype) {
+						   const char* ftype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.local_search.flow.network = kahypar::flowNetworkFromString(ftype);
+}
+
+void kahypar_set_context_local_search_execution_policy(kahypar_context_t* kahypar_context,
+						       const char* ftype) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  context.local_search.flow.execution_policy = kahypar::flowExecutionPolicyFromString(ftype);
 }
 
 void kahypar_set_context_local_search_flow_alpha(kahypar_context_t* kahypar_context,
@@ -367,13 +374,19 @@ void kahypar_set_context_local_search_flow_use_improvement_history(kahypar_conte
 
 // InitialPartitioningParameters
 void kahypar_set_context_initial_partitioning_mode(kahypar_context_t* kahypar_context,
-						   const std::string& ip_mode) {
+						   const char* ip_mode) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.mode = kahypar::modeFromString(ip_mode);
 }
 
+void kahypar_set_context_initial_partitioning_technique(kahypar_context_t* kahypar_context,
+						   const char* ip_technique) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  context.initial_partitioning.technique = kahypar::inititalPartitioningTechniqueFromString(ip_technique);
+}
+
 void kahypar_set_context_initial_partitioning_algo(kahypar_context_t* kahypar_context,
-						   const std::string& ip_algo) {
+						   const char* ip_algo) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.algo = kahypar::initialPartitioningAlgorithmFromString(ip_algo);
 }
@@ -391,7 +404,7 @@ void kahypar_set_context_initial_partitioning_verbose_output(kahypar_context_t* 
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_algorithm(kahypar_context_t* kahypar_context,
-								   const std::string& ctype) {
+								   const char* ctype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.coarsening.algorithm = kahypar::coarseningAlgorithmFromString(ctype);
 }
@@ -409,7 +422,7 @@ void kahypar_set_context_initial_partitioning_coarsening_max_allowed_weight_mult
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_RP_rating_function(kahypar_context_t* kahypar_context,
-									    const std::string& rating_score) {
+									    const char* rating_score) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.coarsening.rating.rating_function = kahypar::ratingFunctionFromString(rating_score);
 }
@@ -423,25 +436,25 @@ void kahypar_set_context_initial_partitioning_coarsening_RP_community_policy(kah
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_RP_heavy_node_policy(kahypar_context_t* kahypar_context,
-									      const std::string& penalty) {
+									      const char* penalty) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.coarsening.rating.heavy_node_penalty_policy = kahypar::heavyNodePenaltyFromString(penalty);
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_RP_acceptance_policy(kahypar_context_t* kahypar_context,
-									      const std::string& crit) {
+									      const char* crit) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.coarsening.rating.acceptance_policy = kahypar::acceptanceCriterionFromString(crit);
 }
 
 void kahypar_set_context_initial_partitioning_coarsening_RP_fixed_vertex_acceptance_policy(kahypar_context_t* kahypar_context,
-											   const std::string& crit) {
+											   const char* crit) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.coarsening.rating.fixed_vertex_acceptance_policy = kahypar::fixedVertexAcceptanceCriterionFromString(crit);
 }
 
 void kahypar_set_context_initial_partitioning_local_search_algorithm(kahypar_context_t* kahypar_context,
-								     const std::string& rtype) {
+								     const char* rtype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.algorithm = kahypar::refinementAlgorithmFromString(rtype);
 }
@@ -459,9 +472,6 @@ void kahypar_set_context_initial_partitioning_local_search_fm_max_number_of_frui
 											    uint32_t max_number_of_fruitless_moves) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.fm.max_number_of_fruitless_moves = max_number_of_fruitless_moves;
-  if (context.local_search.iterations_per_level == -1) {
-    context.initial_partitioning.local_search.iterations_per_level = std::numeric_limits<int>::max();
-  }
 }
 
 void kahypar_set_context_initial_partitioning_local_search_fm_adaptive_stopping_alpha(kahypar_context_t* kahypar_context,
@@ -471,21 +481,27 @@ void kahypar_set_context_initial_partitioning_local_search_fm_adaptive_stopping_
 }
 
 void kahypar_set_context_initial_partitioning_local_search_fm_stopping_rule(kahypar_context_t* kahypar_context,
-									    const std::string& stopfm) {
+									    const char* stopfm) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.fm.stopping_rule = kahypar::stoppingRuleFromString(stopfm);
 }
 
 void kahypar_set_context_initial_partitioning_local_search_flow_algorithm(kahypar_context_t* kahypar_context,
-									  const std::string& ftype) {
+									  const char* ftype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.flow.algorithm = kahypar::flowAlgorithmFromString(ftype);
 }
 
 void kahypar_set_context_initial_partitioning_local_search_flow_network(kahypar_context_t* kahypar_context,
-									const std::string& ftype) {
+									const char* ftype) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.initial_partitioning.local_search.flow.network = kahypar::flowNetworkFromString(ftype);
+}
+
+void kahypar_set_context_initial_partitioning_local_search_execution_policy(kahypar_context_t* kahypar_context,
+									    const char* ftype) {
+  kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
+  context.initial_partitioning.local_search.flow.execution_policy = kahypar::flowExecutionPolicyFromString(ftype);
 }
 
 void kahypar_set_context_initial_partitioning_local_search_flow_alpha(kahypar_context_t* kahypar_context,
