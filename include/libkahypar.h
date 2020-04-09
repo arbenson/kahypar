@@ -82,7 +82,6 @@ KAHYPAR_API void kahypar_partition(const kahypar_hypernode_id_t num_vertices,
                                    kahypar_context_t* kahypar_context,
                                    kahypar_partition_id_t* partition);
 
-
 KAHYPAR_API void kahypar_improve_partition(const kahypar_hypernode_id_t num_vertices,
                                            const kahypar_hyperedge_id_t num_hyperedges,
                                            const double epsilon,
@@ -103,7 +102,6 @@ KAHYPAR_API void kahypar_set_context_partition_mode(kahypar_context_t* kahypar_c
 
 KAHYPAR_API void kahypar_set_context_verbose_output(kahypar_context_t* kahypar_context,
 						    bool verbose_output);
-  
 
 KAHYPAR_API void kahypar_set_context_partition_objective(kahypar_context_t* kahypar_context,
 							 const char* s);
