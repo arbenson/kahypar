@@ -57,8 +57,6 @@ typedef unsigned int kahypar_partition_id_t;
 
 KAHYPAR_API kahypar_context_t* kahypar_context_new();
 KAHYPAR_API void kahypar_context_free(kahypar_context_t* kahypar_context);
-KAHYPAR_API void kahypar_configure_context_from_file(kahypar_context_t* kahypar_context,
-                                                     const char* ini_file_name);
 
 KAHYPAR_API void kahypar_set_custom_target_block_weights(const kahypar_partition_id_t num_blocks,
                                                          const kahypar_hypernode_weight_t* block_weights,
@@ -98,7 +96,6 @@ KAHYPAR_API void kahypar_improve_partition(const kahypar_hypernode_id_t num_vert
                                            kahypar_hyperedge_weight_t* objective,
                                            kahypar_context_t* kahypar_context,
                                            kahypar_partition_id_t* improved_partition);
-
 
 KAHYPAR_API void kahypar_set_context_partition_mode(kahypar_context_t* kahypar_context,
 						    const char* mode);

@@ -561,31 +561,6 @@ void kahypar_context_free(kahypar_context_t* kahypar_context) {
   delete reinterpret_cast<kahypar::Context*>(kahypar_context);
 }
 
-
-void kahypar_read_hypergraph_from_file(const char* file_name,
-                                       kahypar_hypernode_id_t* num_vertices,
-                                       kahypar_hyperedge_id_t* num_hyperedges,
-                                       size_t** hyperedge_indices,
-                                       kahypar_hyperedge_id_t** hyperedges,
-                                       kahypar_hyperedge_weight_t** hyperedge_weights,
-                                       kahypar_hypernode_weight_t** vertex_weights) {
-  std::unique_ptr<size_t[]> indices_ptr(nullptr);
-  std::unique_ptr<kahypar_hyperedge_id_t[]> hyperedges_ptr(nullptr);
-
-  std::unique_ptr<kahypar_hyperedge_weight_t[]> hyperedge_weights_ptr(nullptr);
-  std::unique_ptr<kahypar_hypernode_weight_t[]> vertex_weights_ptr(nullptr);
-
-  kahypar::io::readHypergraphFile(file_name, *num_vertices, *num_hyperedges,
-                                  indices_ptr, hyperedges_ptr, hyperedge_weights_ptr,
-                                  vertex_weights_ptr);
-
-  *hyperedge_indices = indices_ptr.release();
-  *hyperedges = hyperedges_ptr.release();
-  *hyperedge_weights = hyperedge_weights_ptr.release();
-  *vertex_weights = vertex_weights_ptr.release();
-}
-
-
 void kahypar_partition(const kahypar_hypernode_id_t num_vertices,
                        const kahypar_hyperedge_id_t num_hyperedges,
                        const double epsilon,

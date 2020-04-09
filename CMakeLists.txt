@@ -7,6 +7,8 @@ set(PROJECT_CONTACT "kahypar@sebastianschlag.de")
 set(PROJECT_URL "http://www.kahypar.org")
 set(PROJECT_DESCRIPTION "KaHyPar: Karlsruhe Hypergraph Partitioning")
 
+set(CMAKE_CXX_STANDARD 17)
+
 include_directories(${PROJECT_SOURCE_DIR})
 
 find_package(Threads REQUIRED)
@@ -17,8 +19,8 @@ add_subdirectory(external_tools/googletest EXCLUDE_FROM_ALL)
 include_directories(SYSTEM ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(SYSTEM ${gtest_SOURCE_DIR}/../googlemock/include ${gtest_SOURCE_DIR}/../googlemock/)
 
-# add third-party maximum flow algorithms to project
-include_directories(external_tools/maximum_flow)
+# add third-party algorithms to project
+include_directories(external_tools)
 
 option(KAHYPAR_USE_GCOV
   "Compile and run tests with gcov for coverage analysis." OFF)
@@ -193,7 +195,7 @@ if(NOT MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wredundant-decls")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Winit-self")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnoexcept")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnoexcept")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPARANOID ")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weffc++")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")
