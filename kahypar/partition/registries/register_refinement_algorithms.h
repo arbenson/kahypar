@@ -28,8 +28,6 @@
 #include "kahypar/partition/refinement/2way_fm_flow_refiner.h"
 #include "kahypar/partition/refinement/2way_fm_refiner.h"
 #include "kahypar/partition/refinement/do_nothing_refiner.h"
-#include "kahypar/partition/refinement/flow/2way_hyperflowcutter_refiner.h"
-#include "kahypar/partition/refinement/flow/kway_hyperflowcutter_refiner.h"
 #include "kahypar/partition/refinement/flow/policies/flow_execution_policy.h"
 #include "kahypar/partition/refinement/i_refiner.h"
 #include "kahypar/partition/refinement/kway_fm_cut_refiner.h"
@@ -70,18 +68,9 @@ REGISTER_DISPATCHED_REFINER(RefinementAlgorithm::kway_fm_km1,
                             KWayKMinusOneFactoryDispatcher,
                             meta::PolicyRegistry<RefinementStoppingRule>::getInstance().getPolicy(
                               context.local_search.fm.stopping_rule));
-REGISTER_DISPATCHED_REFINER(RefinementAlgorithm::twoway_hyperflow_cutter,
-                            TwoWayHyperFlowCutterFactoryDispatcher,
-                            meta::PolicyRegistry<FlowExecutionMode>::getInstance().getPolicy(
-                              context.local_search.flow.execution_policy));
-REGISTER_DISPATCHED_REFINER(RefinementAlgorithm::kway_hyperflow_cutter,
-                            KWayHyperFlowCutterFactoryDispatcher,
-                            meta::PolicyRegistry<FlowExecutionMode>::getInstance().getPolicy(
-                              context.local_search.flow.execution_policy));
 
 REGISTER_REFINER(RefinementAlgorithm::twoway_fm_hyperflow_cutter, TwoWayFMFlowRefiner);
 REGISTER_REFINER(RefinementAlgorithm::kway_fm_hyperflow_cutter_km1, KWayFMFlowRefiner);
-REREGISTER_REFINER(RefinementAlgorithm::kway_fm_hyperflow_cutter, KWayFMFlowRefiner, 2);
 
 REGISTER_REFINER(RefinementAlgorithm::do_nothing, DoNothingRefiner);
 }  // namespace kahypar
