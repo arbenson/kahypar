@@ -228,33 +228,12 @@ KAHYPAR_API void kahypar_set_context_local_search_fm_adaptive_stopping_alpha(kah
 KAHYPAR_API void kahypar_set_context_local_search_fm_stopping_rule(kahypar_context_t* kahypar_context,
 								   const char* stopfm);
 
-KAHYPAR_API void kahypar_set_context_local_search_flow_algorithm(kahypar_context_t* kahypar_context,
-								 const char* ftype);
-
-KAHYPAR_API void kahypar_set_context_local_search_flow_network(kahypar_context_t* kahypar_context,
-							       const char* ftype);
-
 KAHYPAR_API void kahypar_set_context_local_search_execution_policy(kahypar_context_t* kahypar_context,
 								   const char* ftype);
-
-KAHYPAR_API void kahypar_set_context_local_search_flow_alpha(kahypar_context_t* kahypar_context,
-							     double alpha);
 
 KAHYPAR_API void kahypar_set_context_local_search_flow_beta(kahypar_context_t* kahypar_context,
 							    size_t beta);
   
-KAHYPAR_API void kahypar_set_context_local_search_flow_use_most_balanced_minimum_cut(kahypar_context_t* kahypar_context,
-										     bool use_most_balanced_minimum_cut);
-
-KAHYPAR_API void kahypar_set_context_local_search_flow_use_adaptive_alpha_stopping_rule(kahypar_context_t* kahypar_context,
-											bool use_adaptive_alpha_stopping_rule);
-
-KAHYPAR_API void kahypar_set_context_local_search_flow_ignore_small_hyperedge_cut(kahypar_context_t* kahypar_context,
-										  bool ignore_small_hyperedge_cut);
-
-KAHYPAR_API void kahypar_set_context_local_search_flow_use_improvement_history(kahypar_context_t* kahypar_context,
-									       bool use_improvement_history);
-
 KAHYPAR_API void kahypar_set_context_initial_partitioning_mode(kahypar_context_t* kahypar_context,
 							       const char* ip_mode);
 
@@ -312,30 +291,12 @@ KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_fm_adapti
 KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_fm_stopping_rule(kahypar_context_t* kahypar_context,
 											const char* stopfm);
 
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_algorithm(kahypar_context_t* kahypar_context,
-										      const char* ftype);
-
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_network(kahypar_context_t* kahypar_context,
-										    const char* ftype);
-
 KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_execution_policy(kahypar_context_t* kahypar_context,
 											const char* ftype);
-
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_alpha(kahypar_context_t* kahypar_context,
-										  double alpha);
 
 KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_beta(kahypar_context_t* kahypar_context,
 										 size_t beta);
 
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_use_most_balanced_minimum_cut(kahypar_context_t* kahypar_context,
-													  bool use_most_balanced_minimum_cut);
-
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_use_adaptive_alpha_stopping_rule(kahypar_context_t* kahypar_context,
-													     bool use_adaptive_alpha_stopping_rule);
-
-KAHYPAR_API void kahypar_set_context_initial_partitioning_local_search_flow_ignore_small_hyperedge_cut(kahypar_context_t* kahypar_context,
-												       bool ignore_small_hyperedge_cut);
-  
 #ifdef __cplusplus
 }
 #endif
