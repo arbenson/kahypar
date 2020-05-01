@@ -91,7 +91,7 @@ void kahypar_set_context_partition_hyperedge_size_threshold(kahypar_context_t* k
 							    kahypar::HyperedgeID hyperedge_size_threshold) {
   kahypar::Context& context = *reinterpret_cast<kahypar::Context*>(kahypar_context);
   context.partition.hyperedge_size_threshold = hyperedge_size_threshold;  
-  if (hyperedge_size_threshold == -1) {
+  if (hyperedge_size_threshold == 0) {
     std::numeric_limits<kahypar::HyperedgeID>::max();
   }
 }

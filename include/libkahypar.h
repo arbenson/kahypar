@@ -247,9 +247,6 @@ KAHYPAR_API void kahypar_set_context_initial_partitioning_algo(kahypar_context_t
 KAHYPAR_API void kahypar_set_context_initial_partitioning_nruns(kahypar_context_t* kahypar_context,
 								uint32_t nruns);
 
-KAHYPAR_API void kahypar_set_context_initial_partitioning_verbose_output(kahypar_context_t* kahypar_context,
-									 bool verbose_output);
-
 KAHYPAR_API void kahypar_set_context_initial_partitioning_coarsening_algorithm(kahypar_context_t* kahypar_context,
 									       const char* ctype);
 

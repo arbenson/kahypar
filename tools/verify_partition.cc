@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
   Context context;
   context.partition.k = max_part + 1;
 
-  for (size_t i = 0; i < context.partition.k; ++i) {
+  for (int i = 0; i < context.partition.k; ++i) {
     LOG << i << V(hypergraph.partSize(i)) << V(hypergraph.partWeight(i));
   }
 
